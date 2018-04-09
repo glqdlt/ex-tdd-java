@@ -1,4 +1,6 @@
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
@@ -10,9 +12,31 @@ public class CatalogTest {
 
     private final Catalog catalog = new Catalog();
 
-    @Test
-    public void init(){
+    //    @Test(expected = NullPointerException.class)
+// expected를 이용한 runtime 에러를 잡기에는 여러가지 고려할 상황이 많기 때문에 사용하지 말라고 하는 얘기가 있다.
+//    https://pettermahlen.com/2012/02/07/dont-use-testexpected/
+    // 11버전에서부터 추가 된 Rule 방식으로 진행이 가능하다.
+//    https://junit.org/junit4/javadoc/4.12/org/junit/rules/ExpectedException.html
+//    @Rule
+//    public ExpectedException expectedException = ExpectedException.none();
 
+    @Test
+    public void init() {
+
+    }
+
+    @Test
+    public void isNullTitle() {
+        catalog.setTitle("some-title");
+        assertNotNull(catalog.getTitle());
+    }
+
+    // 아래 expected 는 기존 junit의 방법이다.
+    @Test(expected = NullPointerException.class)
+    public void onNullException() {
+        // 이것은 위의 @Rule로 선언 된 Expected에게 nullpoint를 추가하는 것이다.
+//        expectedException.expect(NullPointerException.class);
+        throw new NullPointerException();
     }
 
 }
