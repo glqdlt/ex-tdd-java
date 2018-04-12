@@ -1,8 +1,8 @@
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-import static org.junit.Assert.*;
+import java.time.LocalDate;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created By iw.jhun
@@ -37,6 +37,19 @@ public class CatalogTest {
         // 이것은 위의 @Rule로 선언 된 Expected에게 nullpoint를 추가하는 것이다.
 //        expectedException.expect(NullPointerException.class);
         throw new NullPointerException();
+    }
+
+    @Test()
+    public void dateCalc(){
+
+        LocalDate joinDate = LocalDate.of(2017,7,10);
+
+        // joinDate
+        System.out.println(joinDate.toString());
+
+        // 292 days after..
+        System.out.println(joinDate.atStartOfDay().plusDays(292).toString());
+
     }
 
 }
